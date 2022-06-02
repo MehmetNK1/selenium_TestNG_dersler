@@ -1,4 +1,5 @@
 package tests.day16_notations;
+
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -9,8 +10,9 @@ import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import utilities.TestBase;
+
 import java.time.Duration;
+
 public class C04_DependsOnMethods  {
     /*
       DependsOnMethods test method'larinin calisma siralamasina karismaz
@@ -25,14 +27,16 @@ public class C04_DependsOnMethods  {
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
     }
+
     @AfterClass
     public void tearDown(){
         driver.close();
     }
+
     @Test
     public void test01(){
         // amazon anasayfaya gidelim
-        driver.get("https://www.ramazon1.com");
+        driver.get("https://www.amazon.com");
     }
     @Test (dependsOnMethods ="test01" , priority = 0)
     public void test02(){
@@ -46,7 +50,7 @@ public class C04_DependsOnMethods  {
         WebElement sonucYaziElementi= driver.findElement(By.xpath("//div[@class='a-section a-spacing-small a-spacing-top-small']"));
         Assert.assertTrue(sonucYaziElementi.getText().contains("Nutella"));
     }
-    @Test
+    @Test(groups = {"grup1", "grup2"})
     public void test04(){
         System.out.println("bak bu calisti");
     }
